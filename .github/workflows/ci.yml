@@ -1,0 +1,55 @@
+name: Deploy Website to GitHub Pages
+
+concurrency:
+  cancel-in-progress: false
+  group: "deploy-website"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure Pages
+        id: configure-pages
+        uses: actions/configure-pages@v6
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build Website
+        env:
+          HUGO_ENV: production
+        run: |
+          hugo --gc --minify --baseURL "${{ steps.configure-pages.outputs.base_url }}/"
+
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  id-token: write
+  pages: write

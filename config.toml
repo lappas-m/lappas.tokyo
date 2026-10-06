@@ -1,0 +1,33 @@
+baseURL = "https://lappas.tokyo/"
+languageCode = "en-us"
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+theme = "github-style"
+title = "Michael Lappas's Blog"
+
+[frontmatter]
+  lastmod = ["lastmod", ":fileModTime", ":default"]
+
+[outputs]
+  home = ["html", "json"]
+
+[outputFormats.json]
+  baseName = "index"
+  isPlainText = false
+  mediaType = "application/json"
+
+[params]
+  author = "Michael Lappas"
+  avatar = "/images/avatar.png"
+  description = ""
+  enableGitalk = false
+  enableSearch = true
+  favicon = "/images/github-mark.png"
+  github = "lappas-m"
+  headerIcon = "/images/github-mark-white.png"
+  keywords = "Blog, Cybersecurity"
+  lastmod = true
+  location = "United States of America"
+  rss = true
+  url = "https://lappas.tokyo"
+  userStatusEmoji = "🎐"
