@@ -9,12 +9,7 @@ title = "Michael Lappas's Blog"
   lastmod = ["lastmod", ":fileModTime", ":default"]
 
 [outputs]
-  home = ["html", "json", "rss"]
-
-[outputFormats.json]
-  baseName = "index"
-  isPlainText = false
-  mediaType = "application/json"
+  home = ["html", "rss"]
 
 [params]
   author = "Michael Lappas"
